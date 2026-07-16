@@ -1,0 +1,170 @@
+/* ========================================
+   CONTACT - Hacker Connection
+   ======================================== */
+
+.contact-section {
+    padding: 100px 0;
+    position: relative;
+}
+
+.contact-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 40px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+}
+
+.contact-info {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    align-content: start;
+}
+
+.contact-card {
+    padding: 30px;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 0, 0, 0.2);
+    text-align: center;
+    transition: all 0.3s ease;
+    clip-path: polygon(8px 0, 100% 0, calc(100% - 8px) 100%, 0 100%);
+}
+
+.contact-card:hover {
+    border-color: var(--blood-red);
+    box-shadow: 0 0 40px rgba(255, 0, 0, 0.3);
+    transform: translateY(-5px);
+}
+
+.contact-card-icon {
+    font-size: 40px;
+    color: var(--blood-red);
+    margin-bottom: 15px;
+    text-shadow: 0 0 20px var(--glow-red);
+}
+
+.contact-card-title {
+    font-family: var(--font-display);
+    font-size: 14px;
+    color: var(--metal-gray3);
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    margin-bottom: 10px;
+}
+
+.contact-card-value {
+    font-family: var(--font-primary);
+    font-size: 18px;
+    color: var(--bone-white);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.contact-card-value:hover {
+    color: var(--blood-red);
+    text-shadow: 0 0 15px var(--glow-red);
+}
+
+/* Contact Form */
+.contact-form-container {
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 0, 0, 0.2);
+    padding: 50px;
+    clip-path: polygon(15px 0, 100% 0, calc(100% - 15px) 100%, 0 100%);
+}
+
+.form-title {
+    font-family: var(--font-primary);
+    font-size: 36px;
+    color: var(--bone-white);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    letter-spacing: 5px;
+}
+
+.form-subtitle {
+    font-family: var(--font-display);
+    font-size: 12px;
+    color: var(--blood-red);
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    margin-bottom: 40px;
+    text-shadow: 0 0 15px var(--glow-red);
+}
+
+.form-group {
+    position: relative;
+    margin-bottom: 30px;
+}
+
+.form-input {
+    width: 100%;
+    padding: 15px 20px;
+    background: rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(255, 0, 0, 0.3);
+    color: var(--bone-white);
+    font-family: var(--font-secondary);
+    font-size: 16px;
+    transition: all 0.3s ease;
+    outline: none;
+}
+
+.form-input:focus {
+    border-color: var(--blood-red);
+    box-shadow: 0 0 20px rgba(255, 0, 0, 0.2);
+    background: rgba(0, 0, 0, 0.8);
+}
+
+.form-input::placeholder {
+    color: var(--metal-gray3);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 12px;
+}
+
+.form-textarea {
+    min-height: 150px;
+    resize: vertical;
+}
+
+.form-submit {
+    width: 100%;
+    padding: 18px;
+    background: linear-gradient(135deg, var(--dark-red), var(--blood-red));
+    border: none;
+    color: var(--bone-white);
+    font-family: var(--font-primary);
+    font-size: 20px;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    clip-path: polygon(10px 0, 100% 0, calc(100% - 10px) 100%, 0 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.form-submit:hover {
+    background: linear-gradient(135deg, var(--blood-red), var(--infernal-red));
+    box-shadow: 0 0 40px rgba(255, 0, 0, 0.4);
+    transform: translateY(-2px);
+}
+
+.form-submit::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s ease;
+}
+
+.form-submit:hover::before {
+    left: 100%;
+}

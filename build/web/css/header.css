@@ -1,0 +1,209 @@
+/* ========================================
+   HEADER - Infernal Navigator
+   ======================================== */
+
+.neo-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    background: rgba(0, 0, 0, 0.95);
+    border-bottom: 2px solid rgba(255, 0, 0, 0.3);
+    box-shadow: 0 5px 30px rgba(255, 0, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+.neo-header.scrolled {
+    background: rgba(0, 0, 0, 0.98);
+    border-bottom: 2px solid rgba(255, 0, 0, 0.6);
+    box-shadow: 0 5px 40px rgba(255, 0, 0, 0.3);
+}
+
+.header-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 80px;
+}
+
+/* Logo */
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    text-decoration: none;
+    position: relative;
+}
+
+.logo-symbol {
+    width: 50px;
+    height: 50px;
+    position: relative;
+}
+
+.logo-symbol::before {
+    content: '⬡';
+    font-size: 45px;
+    color: var(--blood-red);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-shadow: 0 0 30px var(--glow-red), 0 0 60px var(--glow-intense);
+    animation: red-pulse 2s infinite;
+}
+
+.logo-symbol::after {
+    content: '☠';
+    font-size: 25px;
+    color: var(--bone-white);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0.8;
+}
+
+.logo-text {
+    font-family: var(--font-logo);
+    font-size: 28px;
+    color: var(--bone-white);
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    text-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
+    position: relative;
+}
+
+.logo-text::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--blood-red), transparent);
+}
+
+/* Navigation */
+.neo-nav {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+}
+
+.nav-link {
+    font-family: var(--font-primary);
+    font-size: 18px;
+    color: var(--metal-gray3);
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    padding: 10px 15px;
+    position: relative;
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+.nav-link::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 2px;
+    background: var(--blood-red);
+    box-shadow: 0 0 15px var(--glow-red);
+    transition: width 0.3s ease;
+}
+
+.nav-link:hover {
+    color: var(--bone-white);
+    text-shadow: 0 0 20px var(--glow-red);
+}
+
+.nav-link:hover::before {
+    width: 100%;
+}
+
+.nav-link.active {
+    color: var(--blood-red);
+    text-shadow: 0 0 25px var(--glow-red);
+}
+
+.nav-link.active::before {
+    width: 100%;
+    background: var(--blood-red);
+    box-shadow: 0 0 25px var(--glow-intense);
+}
+
+/* Fire effect on hover */
+.nav-link:hover::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 30px;
+    height: 15px;
+    background: radial-gradient(ellipse at center, rgba(255, 0, 0, 0.8) 0%, transparent 70%);
+    filter: blur(5px);
+    animation: blood-drip 1s infinite;
+}
+
+/* System Status Badge */
+.system-status {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 15px;
+    background: rgba(255, 0, 0, 0.1);
+    border: 1px solid rgba(255, 0, 0, 0.3);
+    border-radius: 3px;
+    font-family: var(--font-display);
+    font-size: 10px;
+    color: var(--blood-red);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.status-dot {
+    width: 8px;
+    height: 8px;
+    background: var(--blood-red);
+    border-radius: 50%;
+    animation: red-pulse 2s infinite;
+}
+
+/* Mobile Menu Toggle */
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    padding: 10px;
+}
+
+.menu-toggle span {
+    width: 30px;
+    height: 2px;
+    background: var(--blood-red);
+    transition: all 0.3s ease;
+    box-shadow: 0 0 10px var(--glow-red);
+}
+
+.menu-toggle.active span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+
+.menu-toggle.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.menu-toggle.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -5px);
+}

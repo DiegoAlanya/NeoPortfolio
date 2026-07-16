@@ -1,0 +1,356 @@
+/* ========================================
+   NEO PORTFOLIO - BLOODPUNK CYBER DEMON
+   Dark Fantasy AAA Style
+   ======================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&family=Teko:wght@300;400;500;600;700&family=Black+Ops+One&display=swap');
+
+:root {
+    /* Blood Palette */
+    --bg-primary: #050505;
+    --bg-absolute: #000000;
+    --blood-red: #ff0000;
+    --dark-red: #8B0000;
+    --infernal-red: #cc1111;
+    --bone-white: #f0f0f0;
+    --metal-gray1: #222;
+    --metal-gray2: #333;
+    --metal-gray3: #555;
+    --glow-red: rgba(255, 0, 0, 0.8);
+    --glow-intense: rgba(255, 0, 0, 0.95);
+    --glow-subtle: rgba(255, 0, 0, 0.3);
+    
+    /* Fonts */
+    --font-primary: 'Teko', sans-serif;
+    --font-secondary: 'Rajdhani', sans-serif;
+    --font-display: 'Orbitron', sans-serif;
+    --font-logo: 'Black Ops One', cursive;
+    --font-body: 'Rajdhani', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+}
+
+body {
+    background-color: var(--bg-primary);
+    color: var(--bone-white);
+    font-family: var(--font-body);
+    font-weight: 400;
+    line-height: 1.6;
+    overflow-x: hidden;
+    cursor: default;
+    position: relative;
+}
+
+/* Custom Scrollbar - Blood Style */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-absolute);
+    border-left: 1px solid var(--metal-gray2);
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, var(--blood-red), var(--dark-red));
+    border-radius: 2px;
+    box-shadow: 0 0 15px var(--glow-red);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, var(--infernal-red), var(--blood-red));
+    box-shadow: 0 0 25px var(--glow-intense);
+}
+
+/* Background Layers */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(ellipse at center, rgba(139, 0, 0, 0.1) 0%, transparent 70%),
+        radial-gradient(ellipse at 20% 50%, rgba(255, 0, 0, 0.05) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 20%, rgba(139, 0, 0, 0.08) 0%, transparent 50%);
+    z-index: -2;
+    pointer-events: none;
+}
+
+body::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        repeating-linear-gradient(
+            0deg,
+            transparent,
+            transparent 2px,
+            rgba(0, 0, 0, 0.03) 2px,
+            rgba(0, 0, 0, 0.03) 4px
+        );
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* Vignette Effect */
+.vignette {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(ellipse at center, transparent 50%, rgba(0, 0, 0, 0.8) 100%);
+    z-index: 9998;
+    pointer-events: none;
+}
+
+/* Particle Canvas */
+#particleCanvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* Glitch Effect Global */
+@keyframes glitch-text {
+    0% { transform: translate(0); }
+    20% { transform: translate(-2px, 2px); }
+    40% { transform: translate(-2px, -2px); }
+    60% { transform: translate(2px, 2px); }
+    80% { transform: translate(2px, -2px); }
+    100% { transform: translate(0); }
+}
+
+@keyframes glitch-clip {
+    0% { clip-path: inset(0 0 0 0); }
+    10% { clip-path: inset(20% 0 50% 0); }
+    20% { clip-path: inset(10% 0 60% 0); }
+    30% { clip-path: inset(50% 0 30% 0); }
+    40% { clip-path: inset(30% 0 10% 0); }
+    50% { clip-path: inset(0 0 0 0); }
+    100% { clip-path: inset(0 0 0 0); }
+}
+
+@keyframes blood-drip {
+    0% { opacity: 0; transform: translateY(-10px); }
+    50% { opacity: 0.5; }
+    100% { opacity: 0; transform: translateY(10px); }
+}
+
+@keyframes red-pulse {
+    0%, 100% { box-shadow: 0 0 20px rgba(255, 0, 0, 0.5); }
+    50% { box-shadow: 0 0 40px rgba(255, 0, 0, 0.8), 0 0 80px rgba(255, 0, 0, 0.3); }
+}
+
+@keyframes floating {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+}
+
+@keyframes spin-slow {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@keyframes fog-move {
+    0% { transform: translateX(-100%) translateY(0); }
+    100% { transform: translateX(100%) translateY(-20px); }
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-10px); }
+    75% { transform: translateX(10px); }
+}
+
+@keyframes floatParticle {
+    0% { transform: translateY(0) translateX(0); opacity: 0; }
+    50% { opacity: 1; }
+    100% { transform: translateY(-50px) translateX(20px); opacity: 0; }
+}
+
+@keyframes fogFloat {
+    0% { transform: translateX(-100%) translateY(0); opacity: 0; }
+    50% { opacity: 1; }
+    100% { transform: translateX(200%) translateY(-50px); opacity: 0; }
+}
+
+@keyframes bloodDrip {
+    0% { transform: translateY(-100%); }
+    100% { transform: translateY(100vh); }
+}
+
+@keyframes card-glitch {
+    0% { clip-path: inset(0 0 0 0); }
+    20% { clip-path: inset(10% 0 60% 0); }
+    40% { clip-path: inset(40% 0 20% 0); }
+    60% { clip-path: inset(60% 0 10% 0); }
+    80% { clip-path: inset(20% 0 50% 0); }
+    100% { clip-path: inset(0 0 0 0); }
+}
+
+/* Selection Style */
+::selection {
+    background: var(--blood-red);
+    color: var(--bg-absolute);
+}
+
+::-moz-selection {
+    background: var(--blood-red);
+    color: var(--bg-absolute);
+}
+
+/* Utility Classes */
+.text-blood { color: var(--blood-red); }
+.text-dark-blood { color: var(--dark-red); }
+.text-glow { text-shadow: 0 0 20px var(--glow-red); }
+.text-metal { color: var(--metal-gray3); }
+.bg-dark { background-color: var(--bg-primary); }
+.bg-absolute { background-color: var(--bg-absolute); }
+.border-blood { border: 1px solid var(--blood-red); }
+.glow-effect { box-shadow: 0 0 25px var(--glow-red); }
+
+/* Glass Effect */
+.glass-dark {
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 0, 0, 0.2);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+.glass-blood {
+    background: rgba(139, 0, 0, 0.15);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 0, 0, 0.3);
+    box-shadow: 0 8px 32px rgba(139, 0, 0, 0.2);
+}
+
+/* Blood Overlay */
+.blood-overlay {
+    position: relative;
+}
+
+.blood-overlay::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('../imagenes/blood-overlay.png') center/cover;
+    opacity: 0.1;
+    pointer-events: none;
+    mix-blend-mode: multiply;
+}
+
+/* Demon Runes Background */
+.demon-runes {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('../imagenes/demon-texture.png');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.03;
+    z-index: -3;
+    pointer-events: none;
+    animation: spin-slow 200s linear infinite;
+}
+
+/* Noise Overlay */
+.noise {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    pointer-events: none;
+    opacity: 0.02;
+    background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+}
+
+/* Scroll Progress Bar */
+.scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--dark-red), var(--blood-red), var(--infernal-red));
+    z-index: 10000;
+    transition: width 0.1s ease;
+    box-shadow: 0 0 20px var(--glow-red);
+}
+
+/* Section Title Styles */
+.section-title-container {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.section-badge {
+    display: inline-block;
+    padding: 10px 25px;
+    background: rgba(255, 0, 0, 0.1);
+    border: 1px solid rgba(255, 0, 0, 0.3);
+    font-family: var(--font-display);
+    font-size: 12px;
+    color: var(--blood-red);
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    margin-bottom: 20px;
+    text-shadow: 0 0 15px var(--glow-red);
+}
+
+.section-title {
+    font-family: var(--font-primary);
+    font-size: 72px;
+    color: var(--bone-white);
+    text-transform: uppercase;
+    letter-spacing: 10px;
+    line-height: 1;
+    position: relative;
+    display: inline-block;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 3px;
+    background: var(--blood-red);
+    box-shadow: 0 0 30px var(--glow-red);
+}
+
+.section-subtitle {
+    font-family: var(--font-display);
+    font-size: 14px;
+    color: var(--metal-gray3);
+    text-transform: uppercase;
+    letter-spacing: 8px;
+    margin-top: 20px;
+}
