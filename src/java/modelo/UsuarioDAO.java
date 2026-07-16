@@ -4,67 +4,51 @@ import java.sql.*;
 
 public class UsuarioDAO {
     
+    private static final String HOST = System.getenv("DB_HOST") != null ? System.getenv("DB_HOST") : "tokaido.proxy.rlwy.net";
+    private static final String PORT = System.getenv("DB_PORT") != null ? System.getenv("DB_PORT") : "17686";
+    private static final String NAME = System.getenv("DB_NAME") != null ? System.getenv("DB_NAME") : "railway";
+    private static final String USER = System.getenv("DB_USER") != null ? System.getenv("DB_USER") : "root";
+    private static final String PASS = System.getenv("DB_PASS") != null ? System.getenv("DB_PASS") : "TyYcNUcOAoPabLfxQNUCEZVqjcIMRZRw";
+    
+    private static final String URL = "jdbc:mysql://" + HOST + ":" + PORT + "/" + NAME + "?useSSL=false&serverTimezone=UTC";
+    
     public boolean validar(String email, String password) {
-        Connection conn = null;
-        PreparedStatement ps = null;
-        ResultSet rs = null;
-        
         try {
-            conn = ConexionBD.getConexion();
-            
-            if (conn == null) {
-                System.err.println("❌ Conexion NULL en UsuarioDAO");
-                return false;
-            }
-            
-            String sql = "SELECT * FROM usuarios WHERE email = ? AND password = ?";
-            ps = conn.prepareStatement(sql);
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection conn = DriverManager.getConnection(URL, USER, PASS);
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM usuarios WHERE email = ? AND password = ?");
             ps.setString(1, email);
             ps.setString(2, password);
-            rs = ps.executeQuery();
-            
-            if (rs.next()) {
-                return true;
-            }
+            ResultSet rs = ps.executeQuery();
+            boolean ok = rs.next();
+            rs.close();
+            ps.close();
+            conn.close();
+            return ok;
+        } catch (Exception e) {
+            System.err.println("❌ Error: " + e.getMessage());
             return false;
-            
-        } catch (SQLException e) {
-            System.err.println("❌ Error login: " + e.getMessage());
-            return false;
-        } finally {
-            try { if (rs != null) rs.close(); } catch (Exception e) {}
-            try { if (ps != null) ps.close(); } catch (Exception e) {}
-            try { if (conn != null) conn.close(); } catch (Exception e) {}
         }
     }
     
     public String obtenerNombre(String email) {
-        Connection conn = null;
-        PreparedStatement ps = null;
-        ResultSet rs = null;
-        
         try {
-            conn = ConexionBD.getConexion();
-            
-            if (conn == null) return null;
-            
-            String sql = "SELECT nombre FROM usuarios WHERE email = ?";
-            ps = conn.prepareStatement(sql);
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection conn = DriverManager.getConnection(URL, USER, PASS);
+            PreparedStatement ps = conn.prepareStatement("SELECT nombre FROM usuarios WHERE email = ?");
             ps.setString(1, email);
-            rs = ps.executeQuery();
-            
+            ResultSet rs = ps.executeQuery();
+            String nombre = null;
             if (rs.next()) {
-                return rs.getString("nombre");
+                nombre = rs.getString("nombre");
             }
-            return null;
-            
-        } catch (SQLException e) {
+            rs.close();
+            ps.close();
+            conn.close();
+            return nombre;
+        } catch (Exception e) {
             System.err.println("❌ Error: " + e.getMessage());
             return null;
-        } finally {
-            try { if (rs != null) rs.close(); } catch (Exception e) {}
-            try { if (ps != null) ps.close(); } catch (Exception e) {}
-            try { if (conn != null) conn.close(); } catch (Exception e) {}
         }
     }
 }
