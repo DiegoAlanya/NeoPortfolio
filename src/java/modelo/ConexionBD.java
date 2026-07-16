@@ -18,7 +18,7 @@ public class ConexionBD {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             conn = DriverManager.getConnection(URL, USER, PASS);
-            System.out.println("✅ Conectado a: " + HOST);
+            System.out.println("✅ Conectado a Railway");
         } catch (Exception e) {
             System.err.println("❌ Error: " + e.getMessage());
         }
