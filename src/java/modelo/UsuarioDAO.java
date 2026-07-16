@@ -11,7 +11,11 @@ public class UsuarioDAO {
         
         try {
             conn = ConexionBD.getConexion();
-            if (conn == null) return false;
+            
+            if (conn == null) {
+                System.err.println("❌ Conexion NULL en UsuarioDAO");
+                return false;
+            }
             
             String sql = "SELECT * FROM usuarios WHERE email = ? AND password = ?";
             ps = conn.prepareStatement(sql);
@@ -19,15 +23,18 @@ public class UsuarioDAO {
             ps.setString(2, password);
             rs = ps.executeQuery();
             
-            return rs.next();
+            if (rs.next()) {
+                return true;
+            }
+            return false;
             
         } catch (SQLException e) {
-            System.err.println("Error login: " + e.getMessage());
+            System.err.println("❌ Error login: " + e.getMessage());
             return false;
         } finally {
-            try { if (rs != null) rs.close(); } catch (SQLException e) {}
-            try { if (ps != null) ps.close(); } catch (SQLException e) {}
-            try { if (conn != null) conn.close(); } catch (SQLException e) {}
+            try { if (rs != null) rs.close(); } catch (Exception e) {}
+            try { if (ps != null) ps.close(); } catch (Exception e) {}
+            try { if (conn != null) conn.close(); } catch (Exception e) {}
         }
     }
     
@@ -38,6 +45,7 @@ public class UsuarioDAO {
         
         try {
             conn = ConexionBD.getConexion();
+            
             if (conn == null) return null;
             
             String sql = "SELECT nombre FROM usuarios WHERE email = ?";
@@ -51,12 +59,12 @@ public class UsuarioDAO {
             return null;
             
         } catch (SQLException e) {
-            System.err.println("Error: " + e.getMessage());
+            System.err.println("❌ Error: " + e.getMessage());
             return null;
         } finally {
-            try { if (rs != null) rs.close(); } catch (SQLException e) {}
-            try { if (ps != null) ps.close(); } catch (SQLException e) {}
-            try { if (conn != null) conn.close(); } catch (SQLException e) {}
+            try { if (rs != null) rs.close(); } catch (Exception e) {}
+            try { if (ps != null) ps.close(); } catch (Exception e) {}
+            try { if (conn != null) conn.close(); } catch (Exception e) {}
         }
     }
 }
