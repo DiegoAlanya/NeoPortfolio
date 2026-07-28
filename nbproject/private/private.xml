@@ -5,13 +5,11 @@
         <group>
             <file>file:/C:/Users/karin/Downloads/trabajo/trabajo/NeoPortfolio/web/index.jsp</file>
             <file>file:/C:/Users/karin/Downloads/trabajo/trabajo/NeoPortfolio/Dockerfile</file>
-            <file>file:/C:/Users/karin/Downloads/trabajo/trabajo/NeoPortfolio/src/java/modelo/ConexionBD.java</file>
             <file>file:/C:/Users/karin/Downloads/trabajo/trabajo/NeoPortfolio/build.xml</file>
             <file>file:/C:/Users/karin/Downloads/trabajo/trabajo/NeoPortfolio/web/test-hosting.jsp</file>
             <file>file:/C:/Users/karin/Downloads/trabajo/trabajo/NeoPortfolio/src/java/modelo/ProyectoDAO.java</file>
             <file>file:/C:/Users/karin/Downloads/trabajo/trabajo/NeoPortfolio/src/java/modelo/UsuarioDAO.java</file>
-            <file>file:/C:/Users/karin/Downloads/trabajo/trabajo/NeoPortfolio/web/test-usuario.jsp</file>
-            <file>file:/C:/Users/karin/Downloads/trabajo/trabajo/NeoPortfolio/web/login.jsp</file>
+            <file>file:/C:/Users/karin/Downloads/trabajo/trabajo/NeoPortfolio/web/trabajos.jsp</file>
         </group>
     </open-files>
 </project-private>
