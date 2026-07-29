@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
++<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.sql.*" %>
 <%
     String weekParam = request.getParameter("week");
@@ -85,131 +85,61 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { background: #000; overflow: hidden; }
-        
-        /* Video de fondo fullscreen */
         .video-bg {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            min-width: 100%;
-            min-height: 100%;
-            width: auto;
-            height: auto;
-            transform: translate(-50%, -50%);
-            z-index: 0;
-            object-fit: cover;
+            position: fixed; top: 50%; left: 50%;
+            min-width: 100%; min-height: 100%; width: auto; height: auto;
+            transform: translate(-50%, -50%); z-index: 0; object-fit: cover;
         }
-        
-        /* Overlay oscuro encima del video */
         .video-overlay {
-            position: fixed;
-            inset: 0;
-            background: rgba(0,0,0,0.7);
-            z-index: 1;
+            position: fixed; inset: 0; z-index: 1;
             background: radial-gradient(ellipse at center, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.8) 100%);
         }
-        
-        /* Contenido encima del video */
         .video-content {
-            position: relative;
-            z-index: 2;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            text-align: center;
-            padding: 20px;
+            position: relative; z-index: 2;
+            display: flex; flex-direction: column; align-items: center;
+            justify-content: center; height: 100vh; text-align: center; padding: 20px;
         }
-        
         .video-title {
             font-family: 'Orbitron', sans-serif;
-            font-size: clamp(36px, 8vw, 80px);
-            font-weight: 900;
-            color: #fff;
-            text-transform: uppercase;
-            letter-spacing: 10px;
+            font-size: clamp(36px, 8vw, 80px); font-weight: 900; color: #fff;
+            text-transform: uppercase; letter-spacing: 10px;
             text-shadow: 0 0 40px rgba(220,38,38,0.8), 0 0 80px rgba(245,158,11,0.5);
-            margin-bottom: 20px;
+            margin-bottom: 50px;
             animation: titleGlow 2s ease-in-out infinite;
         }
-        
         @keyframes titleGlow {
             0%, 100% { text-shadow: 0 0 40px rgba(220,38,38,0.8); }
             50% { text-shadow: 0 0 80px rgba(245,158,11,0.8), 0 0 120px rgba(220,38,38,0.6); }
         }
-        
-        .video-subtitle {
-            font-family: 'Orbitron', sans-serif;
-            font-size: clamp(14px, 2vw, 20px);
-            color: #f59e0b;
-            letter-spacing: 8px;
-            text-shadow: 0 0 20px rgba(245,158,11,0.6);
-            margin-bottom: 40px;
-        }
-        
         .video-buttons {
-            display: flex;
-            gap: 20px;
-            flex-wrap: wrap;
-            justify-content: center;
+            display: flex; flex-direction: column; align-items: center; gap: 15px;
         }
-        
         .btn-video {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            padding: 18px 35px;
-            font-family: 'Orbitron', sans-serif;
-            font-size: 14px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 4px;
-            text-decoration: none;
-            transition: all 0.4s ease;
-            border: 2px solid;
-            position: relative;
-            overflow: hidden;
+            display: inline-flex; align-items: center; gap: 10px;
+            padding: 18px 35px; font-family: 'Orbitron', sans-serif;
+            font-size: 14px; font-weight: 700; text-transform: uppercase;
+            letter-spacing: 4px; text-decoration: none;
+            transition: all 0.4s ease; border: 2px solid;
         }
-        
-        .btn-pdf {
-            background: rgba(220,38,38,0.3);
-            border-color: #dc2626;
-            color: #fff;
-            box-shadow: 0 0 30px rgba(220,38,38,0.3);
+        .btn-app {
+            background: rgba(220,38,38,0.3); border-color: #dc2626; color: #fff;
+            box-shadow: 0 0 30px rgba(220,38,38,0.3); font-size: 18px; padding: 22px 50px;
+            animation: btnPulse 2s ease-in-out infinite;
         }
-        
-        .btn-pdf:hover {
+        @keyframes btnPulse {
+            0%, 100% { box-shadow: 0 0 30px rgba(220,38,38,0.3); }
+            50% { box-shadow: 0 0 60px rgba(220,38,38,0.6), 0 0 100px rgba(245,158,11,0.3); }
+        }
+        .btn-app:hover {
             background: rgba(220,38,38,0.6);
-            box-shadow: 0 0 50px rgba(220,38,38,0.6);
+            box-shadow: 0 0 60px rgba(220,38,38,0.8), 0 0 120px rgba(245,158,11,0.5);
             transform: translateY(-3px);
         }
-        
         .btn-back {
-            background: rgba(255,255,255,0.1);
-            border-color: rgba(255,255,255,0.3);
-            color: #fff;
+            background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.3); color: #fff;
         }
-        
         .btn-back:hover {
-            background: rgba(255,255,255,0.2);
-            border-color: #fff;
-            transform: translateY(-3px);
-        }
-        
-        .video-footer {
-            position: fixed;
-            bottom: 30px;
-            z-index: 2;
-            text-align: center;
-            width: 100%;
-        }
-        
-        .video-footer span {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 10px;
-            color: rgba(255,255,255,0.4);
-            letter-spacing: 5px;
+            background: rgba(255,255,255,0.2); border-color: #fff; transform: translateY(-3px);
         }
     </style>
     <% } %>
@@ -249,34 +179,23 @@
     <!-- ============================================= -->
     <!-- SEMANA 14 - VIDEO FULLSCREEN -->
     <!-- ============================================= -->
-    
-    <!-- Video de YouTube como fondo -->
     <iframe class="video-bg" 
             src="https://www.youtube.com/embed/LDp0eDd73Uo?autoplay=1&mute=1&loop=1&playlist=LDp0eDd73Uo&controls=0&showinfo=0&rel=0&modestbranding=1" 
-            frameborder="0" 
-            allow="autoplay; encrypted-media" 
-            allowfullscreen>
+            frameborder="0" allow="autoplay; encrypted-media" allowfullscreen>
     </iframe>
-    
     <div class="video-overlay"></div>
     
     <div class="video-content">
-        <p class="video-subtitle">WEEK 14 &bull; FINAL MISSION</p>
         <h1 class="video-title"><%= projectTitle.toUpperCase() %></h1>
-        <p class="video-subtitle"><%= tech1 %> &bull; <%= tech2 %></p>
         
         <div class="video-buttons">
-            <a href="ver-pdf.jsp?week=14" class="btn-video btn-pdf">
-                <i class="fas fa-file-pdf"></i> VER PDF
+            <a href="https://es.pinterest.com/pin/1047790669577575941/" target="_blank" class="btn-video btn-app">
+                <i class="fas fa-external-link-alt"></i> IR A LA APLICACIÓN
             </a>
             <a href="trabajos.jsp" class="btn-video btn-back">
                 <i class="fas fa-arrow-left"></i> VOLVER
             </a>
         </div>
-    </div>
-    
-    <div class="video-footer">
-        <span><%= projectDescription.length() > 100 ? projectDescription.substring(0, 100) + "..." : projectDescription %></span>
     </div>
     
     <% } else { %>
@@ -294,8 +213,7 @@
         
         <div class="vp-top-bar">
             <a href="trabajos.jsp" class="vp-back-btn">
-                <i class="fas fa-arrow-left"></i>
-                <span>VOLVER A MISIONES</span>
+                <i class="fas fa-arrow-left"></i><span>VOLVER A MISIONES</span>
             </a>
             <div class="vp-week-navigation">
                 <% if (prevWeek >= 1) { %>
