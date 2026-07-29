@@ -120,7 +120,9 @@
     <canvas id="particleCanvas"></canvas>
     
     <% if (esSukuna) { %>
-    <div class="sukuna-fire-bg"></div>
+    <div class="shrine-overlay"></div>
+    <div class="curse-fire"></div>
+    <div class="curse-seal-bg">呪</div>
     <div class="sukuna-particles" id="sukunaParticles"></div>
     <% } %>
     
@@ -153,35 +155,38 @@
         
         <% if (esSukuna) { %>
         <!-- ============================================= -->
-        <!-- DOMINIO DE SUKUNA - SEMANA 14 -->
+        <!-- SANTUARIO MALÉVOLO - FUKUMA MIZUSHI (伏魔御厨子) -->
         <!-- ============================================= -->
         <article class="sukuna-card">
-            <div class="sukuna-mark sukuna-mark-1"></div>
-            <div class="sukuna-mark sukuna-mark-2"></div>
-            <div class="sukuna-mark sukuna-mark-3"></div>
-            <div class="sukuna-mark sukuna-mark-4"></div>
-            <div class="sukuna-seal"></div>
+            <div class="torii-gate torii-left"></div>
+            <div class="torii-gate torii-right"></div>
+            
+            <div class="skull-decor skull-1">💀</div>
+            <div class="skull-decor skull-2">💀</div>
+            <div class="skull-decor skull-3">💀</div>
             
             <div class="sukuna-badge">
-                <div class="sukuna-eye"></div>
-                WEEK_14 &ndash; DOMINIO EXPANDIDO
-                <div class="sukuna-eye"></div>
+                <i class="fas fa-torii-gate"></i>
+                伏魔御厨子 &ndash; EXPANSIÓN TERRITORIAL
+                <i class="fas fa-torii-gate"></i>
             </div>
             
             <h1 class="sukuna-title">
-                <span class="domain">DOMINIO</span> <span class="of">DE</span> <span class="sukuna-name">SUKUNA</span>
+                <span class="jp">フクマ ミズシ</span>
+                <span class="shrine-name">SANTUARIO</span> MALÉVOLO
+                <span class="domain-type">DOMINIO DE SUKUNA</span>
             </h1>
             
             <p class="sukuna-description"><%= projectDescription %></p>
             
             <div class="vp-divider">
-                <span class="vp-divider-line" style="background: linear-gradient(90deg, transparent, #f59e0b, #dc2626, transparent);"></span>
-                <i class="fas fa-fire vp-divider-icon" style="color:#f59e0b;"></i>
-                <span class="vp-divider-line" style="background: linear-gradient(90deg, transparent, #dc2626, #f59e0b, transparent);"></span>
+                <span class="vp-divider-line" style="background: linear-gradient(90deg, transparent, #8B0000, #f59e0b, transparent);"></span>
+                <i class="fas fa-skull vp-divider-icon" style="color:#f59e0b;"></i>
+                <span class="vp-divider-line" style="background: linear-gradient(90deg, transparent, #f59e0b, #8B0000, transparent);"></span>
             </div>
             
             <div class="vp-stack-section">
-                <h3 class="vp-stack-title" style="color:#f59e0b;"><i class="fas fa-skull"></i> TÉCNICAS MALDITAS</h3>
+                <h3 class="vp-stack-title" style="color:#f59e0b;"><i class="fas fa-fire"></i> TÉCNICAS MALDITAS</h3>
                 <div class="vp-stack-tags">
                     <span class="sukuna-tag"><i class="fas fa-code"></i> <%= tech1 %></span>
                     <span class="sukuna-tag"><i class="fas fa-fire"></i> <%= tech2 %></span>
@@ -189,23 +194,23 @@
             </div>
             
             <div class="vp-captures-section">
-                <h3 class="vp-captures-title" style="color:#f59e0b;"><i class="fas fa-images"></i> EVIDENCIA DEL DOMINIO <i class="fas fa-chevron-right vp-chevron" style="color:#f59e0b;"></i></h3>
+                <h3 class="vp-captures-title" style="color:#f59e0b;"><i class="fas fa-scroll"></i> EVIDENCIA DEL SANTUARIO <i class="fas fa-chevron-right vp-chevron" style="color:#f59e0b;"></i></h3>
                 <div class="vp-captures-grid">
                     <div class="vp-capture-card">
-                        <div class="vp-capture-img-container" style="border-color: rgba(245,158,11,0.3);">
-                            <img src="<%= captura1 %>?v=<%= System.currentTimeMillis() %>" alt="Captura 1" class="vp-capture-img" onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22800%22 height=%22500%22%3E%3Crect fill=%22%23000%22 width=%22800%22 height=%22500%22/%3E%3Ctext fill=%22%23f59e0b%22 font-family=%22monospace%22 font-size=%2230%22 x=%22400%22 y=%22250%22 text-anchor=%22middle%22%3ESUKUNA%3C/text%3E%3C/svg%3E';">
+                        <div class="vp-capture-img-container" style="border-color: rgba(139,0,0,0.4);">
+                            <img src="<%= captura1 %>?v=<%= System.currentTimeMillis() %>" alt="Santuario 1" class="vp-capture-img" onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22800%22 height=%22500%22%3E%3Crect fill=%22%23000%22 width=%22800%22 height=%22500%22/%3E%3Ctext fill=%22%238B0000%22 font-family=%22serif%22 font-size=%2260%22 x=%22400%22 y=%22250%22 text-anchor=%22middle%22%3E呪%3C/text%3E%3C/svg%3E';">
                             <div class="vp-capture-overlay"><i class="fas fa-search-plus"></i></div>
-                            <div class="vp-capture-number" style="color:#f59e0b; border-color: rgba(245,158,11,0.3);">01</div>
+                            <div class="vp-capture-number" style="color:#f59e0b;">01</div>
                         </div>
-                        <p class="vp-capture-label"><i class="fas fa-image"></i> INFOGRAFIA_<%= captura1Num %>.PNG</p>
+                        <p class="vp-capture-label"><i class="fas fa-scroll"></i> INFOGRAFIA_<%= captura1Num %>.PNG</p>
                     </div>
                     <div class="vp-capture-card">
-                        <div class="vp-capture-img-container" style="border-color: rgba(245,158,11,0.3);">
-                            <img src="<%= captura2 %>?v=<%= System.currentTimeMillis() %>" alt="Captura 2" class="vp-capture-img" onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22800%22 height=%22500%22%3E%3Crect fill=%22%23000%22 width=%22800%22 height=%22500%22/%3E%3Ctext fill=%22%23f59e0b%22 font-family=%22monospace%22 font-size=%2230%22 x=%22400%22 y=%22250%22 text-anchor=%22middle%22%3ESUKUNA%3C/text%3E%3C/svg%3E';">
+                        <div class="vp-capture-img-container" style="border-color: rgba(139,0,0,0.4);">
+                            <img src="<%= captura2 %>?v=<%= System.currentTimeMillis() %>" alt="Santuario 2" class="vp-capture-img" onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22800%22 height=%22500%22%3E%3Crect fill=%22%23000%22 width=%22800%22 height=%22500%22/%3E%3Ctext fill=%22%23f59e0b%22 font-family=%22serif%22 font-size=%2260%22 x=%22400%22 y=%22250%22 text-anchor=%22middle%22%3E御%3C/text%3E%3C/svg%3E';">
                             <div class="vp-capture-overlay"><i class="fas fa-search-plus"></i></div>
-                            <div class="vp-capture-number" style="color:#f59e0b; border-color: rgba(245,158,11,0.3);">02</div>
+                            <div class="vp-capture-number" style="color:#f59e0b;">02</div>
                         </div>
-                        <p class="vp-capture-label"><i class="fas fa-image"></i> INFOGRAFIA_<%= captura2Num %>.PNG</p>
+                        <p class="vp-capture-label"><i class="fas fa-scroll"></i> INFOGRAFIA_<%= captura2Num %>.PNG</p>
                     </div>
                 </div>
             </div>
@@ -230,16 +235,13 @@
                 WEEK_<%= weekFormatted %> &ndash; MISSION COMPLETE
                 <span class="vp-badge-icon">☠</span>
             </div>
-            
             <h1 class="vp-project-title"><%= projectTitle.toUpperCase() %></h1>
             <p class="vp-project-description"><%= projectDescription %></p>
-            
             <div class="vp-divider">
                 <span class="vp-divider-line"></span>
                 <i class="fas fa-skull vp-divider-icon"></i>
                 <span class="vp-divider-line"></span>
             </div>
-            
             <div class="vp-stack-section">
                 <h3 class="vp-stack-title"><i class="fas fa-microchip"></i> STACK UTILIZADO</h3>
                 <div class="vp-stack-tags">
@@ -247,7 +249,6 @@
                     <span class="vp-tag"><i class="fas fa-code"></i> <%= tech2 %></span>
                 </div>
             </div>
-            
             <div class="vp-captures-section">
                 <h3 class="vp-captures-title"><i class="fas fa-images"></i> INFOGRAFIAS <i class="fas fa-chevron-right vp-chevron"></i></h3>
                 <div class="vp-captures-grid">
@@ -269,18 +270,15 @@
                     </div>
                 </div>
             </div>
-            
             <div class="vp-actions">
                 <a href="ver-pdf.jsp?week=<%= weekFormatted %>" class="vp-btn vp-btn-primary">
                     <i class="fas fa-file-pdf"></i> VER DEMO (PDF)
                 </a>
-                
                 <% if (mostrarEjecutar) { %>
                 <a href="ejercicios.jsp?week=<%= weekFormatted %>" class="vp-btn-ejecutar">
                     <i class="fas fa-play"></i> EJECUTAR
                 </a>
                 <% } %>
-                
                 <a href="trabajos.jsp" class="vp-btn vp-btn-secondary">
                     <i class="fas fa-arrow-left"></i> REGRESAR
                 </a>
@@ -298,7 +296,6 @@
                 </div>
             </a>
             <% } else { %><div></div><% } %>
-            
             <% if (nextWeek <= totalSemanas) { %>
             <a href="ver-proyecto.jsp?week=<%= nextWeekStr %>" class="vp-bottom-nav-btn vp-next">
                 <div>
@@ -322,19 +319,18 @@
     
     <% if (esSukuna) { %>
     <script>
-        // Partículas de energía maldita para Sukuna
         const container = document.getElementById('sukunaParticles');
         if (container) {
-            for (let i = 0; i < 50; i++) {
+            for (let i = 0; i < 60; i++) {
                 const p = document.createElement('div');
                 p.className = 'sukuna-particle';
-                p.style.cssText = 'left:'+Math.random()*100+'%;top:'+Math.random()*100+'%;animation-delay:'+Math.random()*3+'s;animation-duration:'+(Math.random()*3+2)+'s;';
+                p.style.cssText = 'left:'+Math.random()*100+'%;top:'+Math.random()*100+'%;animation-delay:'+Math.random()*4+'s;animation-duration:'+(Math.random()*4+3)+'s;';
                 container.appendChild(p);
             }
         }
-        console.log('%c🔥 DOMINIO DE SUKUNA ACTIVADO %c| %c呪術廻戦',
+        console.log('%c🔥 FUKUMA MIZUSHI %c| %c伏魔御厨子 - SANTUARIO MALÉVOLO',
             'color:#f59e0b;font-size:18px;font-weight:bold;',
-            'color:#dc2626;', 'color:#f59e0b;font-size:14px;');
+            'color:#8B0000;', 'color:#ff4500;font-size:14px;');
     </script>
     <% } %>
 </body>
