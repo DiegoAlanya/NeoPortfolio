@@ -189,7 +189,7 @@
         <h1 class="video-title"><%= projectTitle.toUpperCase() %></h1>
         
         <div class="video-buttons">
-            <a href="https://es.pinterest.com/pin/1047790669577575941/" target="_blank" class="btn-video btn-app">
+            <a href="https://sistema-asistencia-cajas.onrender.com/LoginServlet" target="_blank" class="btn-video btn-app">
                 <i class="fas fa-external-link-alt"></i> IR A LA APLICACIÓN
             </a>
             <a href="trabajos.jsp" class="btn-video btn-back">
