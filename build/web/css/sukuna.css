@@ -1,0 +1,318 @@
+/* ========================================
+   DOMINIO DE SUKUNA - Semana 14
+   Rey de las Maldiciones
+   ======================================== */
+
+:root {
+    --sukuna-black: #000000;
+    --sukuna-dark: #0a0a0a;
+    --sukuna-red: #dc2626;
+    --sukuna-blood: #8B0000;
+    --sukuna-gold: #f59e0b;
+    --sukuna-orange: #ea580c;
+    --sukuna-fire: #ff4500;
+    --sukuna-white: #f0f0f0;
+    --sukuna-gray: #6b7280;
+    --sukuna-glow-red: rgba(220,38,38,0.7);
+    --sukuna-glow-gold: rgba(245,158,11,0.6);
+    --sukuna-glow-fire: rgba(255,69,0,0.5);
+}
+
+/* Override del body para Sukuna */
+body.sukuna-active {
+    background: var(--sukuna-black);
+}
+
+/* Partículas de energía maldita */
+.sukuna-particles {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: -1;
+}
+
+.sukuna-particle {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    background: var(--sukuna-fire);
+    border-radius: 50%;
+    animation: sukunaFloat 3s ease-in-out infinite;
+    box-shadow: 0 0 10px var(--sukuna-glow-fire);
+}
+
+@keyframes sukunaFloat {
+    0%, 100% { transform: translateY(0) translateX(0); opacity: 0.3; }
+    50% { transform: translateY(-30px) translateX(15px); opacity: 0.8; }
+}
+
+/* Ojo de Sukuna */
+.sukuna-eye {
+    position: relative;
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+}
+
+.sukuna-eye::before {
+    content: '';
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background: var(--sukuna-red);
+    border-radius: 50%;
+    box-shadow: 0 0 30px var(--sukuna-glow-red), 0 0 60px var(--sukuna-glow-fire);
+    animation: sukunaEyePulse 2s ease-in-out infinite;
+}
+
+.sukuna-eye::after {
+    content: '';
+    position: absolute;
+    width: 10px;
+    height: 15px;
+    background: var(--sukuna-black);
+    border-radius: 50%;
+    top: 8px;
+    left: 10px;
+}
+
+@keyframes sukunaEyePulse {
+    0%, 100% { box-shadow: 0 0 30px var(--sukuna-glow-red); }
+    50% { box-shadow: 0 0 60px var(--sukuna-glow-fire), 0 0 100px var(--sukuna-glow-gold); }
+}
+
+/* Marcas de Sukuna */
+.sukuna-mark {
+    position: absolute;
+    width: 60px;
+    height: 4px;
+    background: linear-gradient(90deg, var(--sukuna-red), transparent);
+    opacity: 0.6;
+}
+
+.sukuna-mark-1 { top: 20px; left: 20px; transform: rotate(-15deg); }
+.sukuna-mark-2 { top: 20px; right: 20px; transform: rotate(15deg); }
+.sukuna-mark-3 { bottom: 20px; left: 20px; transform: rotate(15deg); }
+.sukuna-mark-4 { bottom: 20px; right: 20px; transform: rotate(-15deg); }
+
+/* Badge de Sukuna */
+.sukuna-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 28px;
+    background: rgba(220,38,38,0.1);
+    border: 2px solid var(--sukuna-red);
+    font-family: 'Orbitron', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--sukuna-gold);
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-bottom: 30px;
+    text-shadow: 0 0 15px var(--sukuna-glow-gold);
+    position: relative;
+    overflow: hidden;
+    animation: sukunaBadgeGlow 2s ease-in-out infinite;
+}
+
+@keyframes sukunaBadgeGlow {
+    0%, 100% { border-color: var(--sukuna-red); }
+    50% { border-color: var(--sukuna-gold); }
+}
+
+.sukuna-badge::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(245,158,11,0.1) 0%, transparent 60%);
+    animation: sukunaSpin 4s linear infinite;
+}
+
+@keyframes sukunaSpin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* Título Sukuna */
+.sukuna-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: clamp(36px, 6vw, 64px);
+    font-weight: 900;
+    color: var(--sukuna-white);
+    text-transform: uppercase;
+    letter-spacing: 8px;
+    margin-bottom: 25px;
+    line-height: 1.1;
+    text-shadow: 0 0 30px rgba(245,158,11,0.5), 0 0 60px rgba(220,38,38,0.3);
+    position: relative;
+}
+
+.sukuna-title .domain {
+    color: var(--sukuna-red);
+    text-shadow: 0 0 40px var(--sukuna-glow-red), 0 0 80px var(--sukuna-glow-fire);
+}
+
+.sukuna-title .of {
+    color: var(--sukuna-gold);
+    font-size: 0.7em;
+}
+
+.sukuna-title .sukuna-name {
+    color: var(--sukuna-orange);
+    text-shadow: 0 0 50px var(--sukuna-glow-gold), 0 0 100px var(--sukuna-glow-fire);
+}
+
+/* Descripción */
+.sukuna-description {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 18px;
+    color: var(--sukuna-gray);
+    line-height: 1.8;
+    margin-bottom: 40px;
+    max-width: 750px;
+    padding-left: 25px;
+    border-left: 3px solid var(--sukuna-gold);
+    box-shadow: -10px 0 30px rgba(245,158,11,0.1);
+}
+
+/* Carta de dominio */
+.sukuna-card {
+    background: linear-gradient(160deg, rgba(10,0,0,0.98) 0%, rgba(20,0,0,0.95) 50%, rgba(5,0,0,0.98) 100%);
+    border: 2px solid var(--sukuna-red);
+    padding: 60px 50px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(220,38,38,0.2), 0 0 100px rgba(245,158,11,0.1);
+    animation: sukunaCardPulse 3s ease-in-out infinite;
+}
+
+@keyframes sukunaCardPulse {
+    0%, 100% { border-color: var(--sukuna-red); }
+    50% { border-color: var(--sukuna-gold); }
+}
+
+.sukuna-card::before {
+    content: '呪';
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    font-size: 120px;
+    color: rgba(220,38,38,0.05);
+    font-family: serif;
+    pointer-events: none;
+}
+
+.sukuna-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--sukuna-gold), var(--sukuna-red), transparent);
+    opacity: 0.6;
+}
+
+/* Tags de Sukuna */
+.sukuna-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 28px;
+    background: rgba(245,158,11,0.05);
+    border: 1px solid var(--sukuna-gold);
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--sukuna-gold);
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    transition: all 0.4s ease;
+    cursor: default;
+}
+
+.sukuna-tag:hover {
+    background: rgba(245,158,11,0.15);
+    border-color: var(--sukuna-fire);
+    box-shadow: 0 0 30px var(--sukuna-glow-gold), 0 0 60px var(--sukuna-glow-fire);
+    transform: translateY(-3px);
+    color: var(--sukuna-white);
+}
+
+/* Botón de dominio */
+.sukuna-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 18px 40px;
+    background: linear-gradient(135deg, var(--sukuna-blood), var(--sukuna-red));
+    color: var(--sukuna-white);
+    font-family: 'Orbitron', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    text-decoration: none;
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 0 30px var(--sukuna-glow-red), 0 0 60px var(--sukuna-glow-fire);
+    animation: sukunaBtnPulse 2s ease-in-out infinite;
+}
+
+@keyframes sukunaBtnPulse {
+    0%, 100% { box-shadow: 0 0 30px var(--sukuna-glow-red); }
+    50% { box-shadow: 0 0 50px var(--sukuna-glow-gold), 0 0 80px var(--sukuna-glow-fire); }
+}
+
+.sukuna-btn::before {
+    content: '';
+    position: absolute;
+    top: 0; left: -100%;
+    width: 100%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(245,158,11,0.3), transparent);
+    transition: left 0.5s ease;
+}
+
+.sukuna-btn:hover {
+    background: linear-gradient(135deg, var(--sukuna-red), var(--sukuna-fire));
+    box-shadow: 0 0 50px var(--sukuna-glow-gold), 0 0 100px var(--sukuna-glow-fire);
+    transform: translateY(-3px);
+}
+
+.sukuna-btn:hover::before { left: 100%; }
+
+/* Sello de dominio */
+.sukuna-seal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 150px;
+    height: 150px;
+    border: 3px solid var(--sukuna-gold);
+    border-radius: 50%;
+    opacity: 0.1;
+    animation: sukunaSealRotate 10s linear infinite;
+}
+
+@keyframes sukunaSealRotate {
+    from { transform: translate(-50%, -50%) rotate(0deg); }
+    to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* Fuego de fondo */
+.sukuna-fire-bg {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 200px;
+    background: linear-gradient(to top, rgba(255,69,0,0.05), transparent);
+    pointer-events: none;
+    z-index: -1;
+}

@@ -7,13 +7,11 @@
     int weekNumber = Integer.parseInt(weekParam);
     String weekFormatted = String.format("%02d", weekNumber);
     
-    // Calcular capturas
     int captura1Num = (weekNumber * 2) - 1;
     int captura2Num = weekNumber * 2;
     String captura1 = "imagenes/capturas/captura_" + captura1Num + ".png";
     String captura2 = "imagenes/capturas/captura_" + captura2Num + ".png";
     
-    // Obtener datos desde Railway
     String projectTitle = "Proyecto", projectDescription = "", tech1 = "", tech2 = "";
     String nextProjectTitle = "", prevProjectTitle = "";
     int totalSemanas = 14;
@@ -25,7 +23,6 @@
             "root", "TyYcNUcOAoPabLfxQNUCEZVqjcIMRZRw"
         );
         
-        // Obtener proyecto actual
         PreparedStatement ps = conn.prepareStatement("SELECT * FROM proyectos WHERE semana = ?");
         ps.setString(1, weekFormatted);
         ResultSet rs = ps.executeQuery();
@@ -37,7 +34,6 @@
         }
         rs.close(); ps.close();
         
-        // Obtener títulos de navegación
         int nextWeek = weekNumber + 1;
         int prevWeek = weekNumber - 1;
         
@@ -62,14 +58,13 @@
         projectDescription = "Error al cargar datos.";
     }
     
-    // Navegación
     int nextWeek = weekNumber + 1;
     int prevWeek = weekNumber - 1;
     String nextWeekStr = String.format("%02d", nextWeek);
     String prevWeekStr = String.format("%02d", prevWeek);
     
-    // Mostrar botón EJECUTAR (semanas 01-11)
     boolean mostrarEjecutar = (weekNumber >= 1 && weekNumber <= 11);
+    boolean esSukuna = (weekNumber == 14);
 %>
 <!DOCTYPE html>
 <html lang="es">
@@ -85,48 +80,33 @@
     <link rel="stylesheet" href="css/responsive.css">
     <link rel="stylesheet" href="css/ver-proyecto.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <% if (esSukuna) { %>
+    <link rel="stylesheet" href="css/sukuna.css">
+    <style>body { background: #000 !important; }</style>
+    <% } %>
+    
     <style>
         .vp-btn-ejecutar {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-            padding: 17px 35px;
-            font-family: 'Orbitron', sans-serif;
-            font-size: 13px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 4px;
-            text-decoration: none;
+            display: inline-flex; align-items: center; justify-content: center; gap: 12px;
+            padding: 17px 35px; font-family: 'Orbitron', sans-serif; font-size: 13px; font-weight: 700;
+            text-transform: uppercase; letter-spacing: 4px; text-decoration: none;
             transition: all 0.45s cubic-bezier(0.4, 0, 0.2, 1);
-            background: linear-gradient(135deg, #166534, #22c55e);
-            color: #fff;
-            border: 1px solid #22c55e;
-            box-shadow: 0 0 25px rgba(34,197,94,0.3);
-            min-width: 200px;
-            position: relative;
-            overflow: hidden;
-            animation: ejecutarPulse 2s infinite;
+            background: linear-gradient(135deg, #166534, #22c55e); color: #fff;
+            border: 1px solid #22c55e; box-shadow: 0 0 25px rgba(34,197,94,0.3);
+            min-width: 200px; position: relative; overflow: hidden; animation: ejecutarPulse 2s infinite;
         }
-        
         .vp-btn-ejecutar::before {
-            content: '';
-            position: absolute;
-            top: 0; left: -100%;
-            width: 100%; height: 100%;
+            content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
             background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
             transition: left 0.5s ease;
         }
-        
         .vp-btn-ejecutar:hover {
             background: linear-gradient(135deg, #22c55e, #4ade80);
             box-shadow: 0 0 45px rgba(34,197,94,0.6), 0 10px 30px rgba(0,0,0,0.4);
-            transform: translateY(-3px);
-            border-color: #4ade80;
+            transform: translateY(-3px); border-color: #4ade80;
         }
-        
         .vp-btn-ejecutar:hover::before { left: 100%; }
-        
         @keyframes ejecutarPulse {
             0%, 100% { box-shadow: 0 0 25px rgba(34,197,94,0.3); }
             50% { box-shadow: 0 0 50px rgba(34,197,94,0.6); }
@@ -138,6 +118,11 @@
     <div class="vignette"></div>
     <div class="noise"></div>
     <canvas id="particleCanvas"></canvas>
+    
+    <% if (esSukuna) { %>
+    <div class="sukuna-fire-bg"></div>
+    <div class="sukuna-particles" id="sukunaParticles"></div>
+    <% } %>
     
     <%@ include file="includes/header.jsp" %>
     
@@ -155,7 +140,9 @@
                     <i class="fas fa-chevron-left"></i> WEEK_<%= prevWeekStr %>
                 </a>
                 <% } %>
+                
                 <span class="vp-current-week">WEEK_<%= weekFormatted %></span>
+                
                 <% if (nextWeek <= totalSemanas) { %>
                 <a href="ver-proyecto.jsp?week=<%= nextWeekStr %>" class="vp-nav-btn">
                     WEEK_<%= nextWeekStr %> <i class="fas fa-chevron-right"></i>
@@ -164,6 +151,79 @@
             </div>
         </div>
         
+        <% if (esSukuna) { %>
+        <!-- ============================================= -->
+        <!-- DOMINIO DE SUKUNA - SEMANA 14 -->
+        <!-- ============================================= -->
+        <article class="sukuna-card">
+            <div class="sukuna-mark sukuna-mark-1"></div>
+            <div class="sukuna-mark sukuna-mark-2"></div>
+            <div class="sukuna-mark sukuna-mark-3"></div>
+            <div class="sukuna-mark sukuna-mark-4"></div>
+            <div class="sukuna-seal"></div>
+            
+            <div class="sukuna-badge">
+                <div class="sukuna-eye"></div>
+                WEEK_14 &ndash; DOMINIO EXPANDIDO
+                <div class="sukuna-eye"></div>
+            </div>
+            
+            <h1 class="sukuna-title">
+                <span class="domain">DOMINIO</span> <span class="of">DE</span> <span class="sukuna-name">SUKUNA</span>
+            </h1>
+            
+            <p class="sukuna-description"><%= projectDescription %></p>
+            
+            <div class="vp-divider">
+                <span class="vp-divider-line" style="background: linear-gradient(90deg, transparent, #f59e0b, #dc2626, transparent);"></span>
+                <i class="fas fa-fire vp-divider-icon" style="color:#f59e0b;"></i>
+                <span class="vp-divider-line" style="background: linear-gradient(90deg, transparent, #dc2626, #f59e0b, transparent);"></span>
+            </div>
+            
+            <div class="vp-stack-section">
+                <h3 class="vp-stack-title" style="color:#f59e0b;"><i class="fas fa-skull"></i> TÉCNICAS MALDITAS</h3>
+                <div class="vp-stack-tags">
+                    <span class="sukuna-tag"><i class="fas fa-code"></i> <%= tech1 %></span>
+                    <span class="sukuna-tag"><i class="fas fa-fire"></i> <%= tech2 %></span>
+                </div>
+            </div>
+            
+            <div class="vp-captures-section">
+                <h3 class="vp-captures-title" style="color:#f59e0b;"><i class="fas fa-images"></i> EVIDENCIA DEL DOMINIO <i class="fas fa-chevron-right vp-chevron" style="color:#f59e0b;"></i></h3>
+                <div class="vp-captures-grid">
+                    <div class="vp-capture-card">
+                        <div class="vp-capture-img-container" style="border-color: rgba(245,158,11,0.3);">
+                            <img src="<%= captura1 %>?v=<%= System.currentTimeMillis() %>" alt="Captura 1" class="vp-capture-img" onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22800%22 height=%22500%22%3E%3Crect fill=%22%23000%22 width=%22800%22 height=%22500%22/%3E%3Ctext fill=%22%23f59e0b%22 font-family=%22monospace%22 font-size=%2230%22 x=%22400%22 y=%22250%22 text-anchor=%22middle%22%3ESUKUNA%3C/text%3E%3C/svg%3E';">
+                            <div class="vp-capture-overlay"><i class="fas fa-search-plus"></i></div>
+                            <div class="vp-capture-number" style="color:#f59e0b; border-color: rgba(245,158,11,0.3);">01</div>
+                        </div>
+                        <p class="vp-capture-label"><i class="fas fa-image"></i> INFOGRAFIA_<%= captura1Num %>.PNG</p>
+                    </div>
+                    <div class="vp-capture-card">
+                        <div class="vp-capture-img-container" style="border-color: rgba(245,158,11,0.3);">
+                            <img src="<%= captura2 %>?v=<%= System.currentTimeMillis() %>" alt="Captura 2" class="vp-capture-img" onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22800%22 height=%22500%22%3E%3Crect fill=%22%23000%22 width=%22800%22 height=%22500%22/%3E%3Ctext fill=%22%23f59e0b%22 font-family=%22monospace%22 font-size=%2230%22 x=%22400%22 y=%22250%22 text-anchor=%22middle%22%3ESUKUNA%3C/text%3E%3C/svg%3E';">
+                            <div class="vp-capture-overlay"><i class="fas fa-search-plus"></i></div>
+                            <div class="vp-capture-number" style="color:#f59e0b; border-color: rgba(245,158,11,0.3);">02</div>
+                        </div>
+                        <p class="vp-capture-label"><i class="fas fa-image"></i> INFOGRAFIA_<%= captura2Num %>.PNG</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="vp-actions">
+                <a href="ver-pdf.jsp?week=14" class="sukuna-btn">
+                    <i class="fas fa-file-pdf"></i> EXPANSIÓN DE DOMINIO (PDF)
+                </a>
+                <a href="trabajos.jsp" class="vp-btn vp-btn-secondary">
+                    <i class="fas fa-arrow-left"></i> REGRESAR
+                </a>
+            </div>
+        </article>
+        
+        <% } else { %>
+        <!-- ============================================= -->
+        <!-- PROYECTO NORMAL (SEMANAS 01-13) -->
+        <!-- ============================================= -->
         <article class="vp-project-card">
             <div class="vp-week-badge">
                 <span class="vp-badge-icon">☠</span>
@@ -225,8 +285,8 @@
                     <i class="fas fa-arrow-left"></i> REGRESAR
                 </a>
             </div>
-            
         </article>
+        <% } %>
         
         <div class="vp-bottom-navigation">
             <% if (prevWeek >= 1) { %>
@@ -259,5 +319,23 @@
     <script src="js/scroll.js"></script>
     <script src="js/animations.js"></script>
     <script src="js/ver-proyecto.js"></script>
+    
+    <% if (esSukuna) { %>
+    <script>
+        // Partículas de energía maldita para Sukuna
+        const container = document.getElementById('sukunaParticles');
+        if (container) {
+            for (let i = 0; i < 50; i++) {
+                const p = document.createElement('div');
+                p.className = 'sukuna-particle';
+                p.style.cssText = 'left:'+Math.random()*100+'%;top:'+Math.random()*100+'%;animation-delay:'+Math.random()*3+'s;animation-duration:'+(Math.random()*3+2)+'s;';
+                container.appendChild(p);
+            }
+        }
+        console.log('%c🔥 DOMINIO DE SUKUNA ACTIVADO %c| %c呪術廻戦',
+            'color:#f59e0b;font-size:18px;font-weight:bold;',
+            'color:#dc2626;', 'color:#f59e0b;font-size:14px;');
+    </script>
+    <% } %>
 </body>
 </html>
